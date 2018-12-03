@@ -73,11 +73,11 @@ class App:
         pygame.display.set_caption('Snake')
         self.running = True
 
-    def on_event(self, event):
+    def event(self, event):
         if event.type == QUIT:
             self.running = False
 
-    def on_loop(self):
+    def loop(self):
         self.snake.move()
         if self.snake.ate(self.apple):
             self.apple.place()
@@ -88,17 +88,17 @@ class App:
             # TODO: Reset game rather than quitting
             self.running = False
 
-    def on_render(self):
+    def render(self):
         self.surface.fill(BLACK)
         pygame.draw.rect(self.surface, RED, [self.apple.x * STEP, (HEIGHT - self.apple.y) * STEP, STEP, STEP])
         for segment in self.snake.segments:
             pygame.draw.rect(self.surface, GREEN, [segment.x * STEP, (HEIGHT - segment.y) * STEP, STEP, STEP])
         pygame.display.flip()
 
-    def on_cleanup(self):
+    def cleanup(self):
         pygame.quit()
 
-    def on_execute(self):
+    def execute(self):
         self.apple.place()
 
         while (self.running):
@@ -116,11 +116,11 @@ class App:
             if (keys[K_ESCAPE]):
                 self.running = False
 
-            self.on_loop()
-            self.on_render()
+            self.loop()
+            self.render()
 
             time.sleep(0.1)
-        self.on_cleanup()
+        self.cleanup()
 
 if __name__ == '__main__':
-    App().on_execute()
+    App().execute()
