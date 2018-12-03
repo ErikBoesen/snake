@@ -50,8 +50,8 @@ class Snake:
         self.segments.append(Segment(tail.x + self.speed_x, tail.y + self.speed_y))
 
     def looped(self):
-        for segment in segments[1:]:
-            if segment.x == segments[0].x and segment.y == segments[0].y:
+        for segment in self.segments[1:]:
+            if segment.x == self.segments[0].x and segment.y == self.segments[0].y:
                 return True
         return False
 
@@ -99,7 +99,7 @@ class App:
     def on_render(self):
         self.surface.fill(BLACK)
         pygame.draw.rect(self.surface, RED, [self.apple.x, self.apple.y, STEP, STEP])
-        for segment in snake.segments:
+        for segment in self.snake.segments:
             pygame.draw.rect(self.surface, GREEN, [segment.x, segment.y, STEP, STEP])
         pygame.display.flip()
 
@@ -113,6 +113,7 @@ class App:
         while (self.running):
             pygame.event.pump()
             keys = pygame.key.get_pressed()
+            print(keys)
 
             if (keys[K_RIGHT]):
                 pass
