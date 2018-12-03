@@ -61,7 +61,11 @@ class Snake:
         for i in range(0,self.length):
             surface.blit(image,(self.x[i],self.y[i]))"""
 
-
+BLACK = (  0,   0,   0)
+WHITE = (255, 255, 255)
+BLUE =  (  0,   0, 255)
+GREEN = (  0, 255,   0)
+RED =   (255,   0,   0)
 class App:
     # TODO: Move actual game logic to Game object
     snake = Snake(1, 1)
@@ -86,14 +90,17 @@ class App:
         if self.snake.segments[0].x == self.apple.x and self.snake.segments[0].y == self.apple.y:
             self.apple.place()
             self.snake.grow()
-            if not (0 <= snake.segments[0].x < WIDTH and 0 <= snake.segments[0].y < HEIGHT):
 
+        if not (0 <= self.snake.segments[0].x < WIDTH and 0 <= self.snake.segments[0].y < HEIGHT) or self.snake.looped():
+            print(len(self.snake.segments))
+            # TODO: Reset game rather than quitting
+            self.running = False
 
     def on_render(self):
-        self._display_surf.fill((0,0,0))
-        self.player.draw(self._display_surf, self._image_surf)
-        self.apple.draw(self._display_surf, self._apple_surf)
-        self.computer.draw(self._display_surf, self._image_surf)
+        self.surface.fill(BLACK)
+        pygame.draw.rect(self.surface, RED, [self.apple.x, self.apple.y, STEP, STEP])
+        for segment in snake.segments:
+            pygame.draw.rect(self.surface, GREEN, [segment.x, segment.y, STEP, STEP])
         pygame.display.flip()
 
     def on_cleanup(self):
@@ -103,32 +110,27 @@ class App:
         if self.on_init() == False:
             self.running = False
 
-        while( self.running ):
+        while (self.running):
             pygame.event.pump()
             keys = pygame.key.get_pressed()
 
             if (keys[K_RIGHT]):
-                self.player.moveRight()
-
+                pass
             if (keys[K_LEFT]):
-                self.player.moveLeft()
-
+                pass
             if (keys[K_UP]):
-                self.player.moveUp()
-
+                pass
             if (keys[K_DOWN]):
-                self.player.moveDown()
-
+                pass
             if (keys[K_ESCAPE]):
                 self.running = False
 
             self.on_loop()
             self.on_render()
 
-            time.sleep (50.0 / 1000.0);
+            time.sleep (50 / 1000)
         self.on_cleanup()
 
-if __name__ == "__main__" :
-    theApp = App()
-    theApp.on_execute()
+if __name__ == '__main__':
+    App().on_execute()
 
