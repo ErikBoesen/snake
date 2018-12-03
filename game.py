@@ -54,13 +54,14 @@ class Snake:
     def outbound(self):
         return not (0 <= self.segments[0].x < WIDTH and 0 <= self.segments[0].y < HEIGHT)
 
-    # TODO: Implement ate method here?
+    def ate(self, apple):
+        return self.segments[0].x == apple.x and self.segments[0].y == apple.y
 
 BLACK = (  0,   0,   0)
 WHITE = (255, 255, 255)
-BLUE =  (  0,   0, 255)
+BLUE  = (  0,   0, 255)
 GREEN = (  0, 255,   0)
-RED =   (255,   0,   0)
+RED   = (255,   0,   0)
 class App:
     # TODO: Move actual game logic to Game object
     snake = Snake()
@@ -78,8 +79,7 @@ class App:
 
     def on_loop(self):
         self.snake.move()
-        # TODO: Move self logic to snake
-        if self.snake.segments[0].x == self.apple.x and self.snake.segments[0].y == self.apple.y:
+        if self.snake.ate(self.apple):
             self.apple.place()
             self.snake.grow()
 
