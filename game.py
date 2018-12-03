@@ -26,8 +26,8 @@ class Snake:
     speed_x = 0
     speed_y = 0
 
-    def __init__(self, x, y):
-        self.segments.append(Segment(x, y))
+    def __init__(self):
+        self.segments.append(Segment(random.randint(0, WIDTH-1), random.randint(1, HEIGHT)))
 
     def set_speed(self, x, y):
         if (not ((-x == self.speed_x) and (-y == self.speed_y))) or (len(self.segments) == 1):
@@ -60,7 +60,7 @@ GREEN = (  0, 255,   0)
 RED =   (255,   0,   0)
 class App:
     # TODO: Move actual game logic to Game object
-    snake = Snake(1, 1)
+    snake = Snake()
     apple = Apple()
 
     def __init__(self):
