@@ -35,11 +35,11 @@ class Snake:
             self.speed_y = y
 
     def move(self):
-        self.segments[0].x += self.speed_x
-        self.segments[0].y += self.speed_y
         for i in range(len(self.segments) - 1, 0, -1):
             self.segments[i].x = self.segments[i - 1].x
             self.segments[i].y = self.segments[i - 1].y
+        self.segments[0].x += self.speed_x
+        self.segments[0].y += self.speed_y
 
     def grow(self):
         tail = self.segments[-1]
