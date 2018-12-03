@@ -65,8 +65,6 @@ class App:
 
     def __init__(self):
         self.running = True
-
-    def on_init(self):
         pygame.init()
         self.surface = pygame.display.set_mode((WIDTH * STEP, HEIGHT * STEP))
         pygame.display.set_caption('Snake')
@@ -99,8 +97,6 @@ class App:
         pygame.quit()
 
     def on_execute(self):
-        if self.on_init() == False:
-            self.running = False
         self.apple.place()
 
         while (self.running):
