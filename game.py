@@ -3,23 +3,22 @@ from random import randint
 import pygame
 import time
 
+STEP = 20
+
 class Apple:
     x = 0
     y = 0
-    step = 44
 
-    def __init__(self,x,y):
-        self.x = x * self.step
-        self.y = y * self.step
+    def __init__(self, x, y):
+        self.x = x * STEP
+        self.y = y * STEP
 
     def draw(self, surface, image):
-        surface.blit(image,(self.x, self.y))
-
+        pygame.draw.rect(surface, [self.x, self.y, STEP, STEP])
 
 class Player:
     x = [0]
     y = [0]
-    step = 44
     direction = 0
     length = 3
 
@@ -37,8 +36,7 @@ class Player:
        self.x[0] = 2*44
 
     def update(self):
-
-        self.updateCount = self.updateCount + 1
+        self.updateCount += 1
         if self.updateCount > self.updateCountMax:
 
             # update previous positions
@@ -48,13 +46,13 @@ class Player:
 
             # update position of head of snake
             if self.direction == 0:
-                self.x[0] = self.x[0] + self.step
+                self.x[0] = self.x[0] + STEP
             if self.direction == 1:
-                self.x[0] = self.x[0] - self.step
+                self.x[0] = self.x[0] - STEP
             if self.direction == 2:
-                self.y[0] = self.y[0] - self.step
+                self.y[0] = self.y[0] - STEP
             if self.direction == 3:
-                self.y[0] = self.y[0] + self.step
+                self.y[0] = self.y[0] + STEP
 
             self.updateCount = 0
 
@@ -109,13 +107,13 @@ class Computer:
 
             # update position of head of snake
             if self.direction == 0:
-                self.x[0] = self.x[0] + self.step
+                self.x[0] = self.x[0] + STEP
             if self.direction == 1:
-                self.x[0] = self.x[0] - self.step
+                self.x[0] = self.x[0] - STEP
             if self.direction == 2:
-                self.y[0] = self.y[0] - self.step
+                self.y[0] = self.y[0] - STEP
             if self.direction == 3:
-                self.y[0] = self.y[0] + self.step
+                self.y[0] = self.y[0] + STEP
 
             self.updateCount = 0
 
