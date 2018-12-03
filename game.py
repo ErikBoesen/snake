@@ -1,5 +1,5 @@
 from pygame.locals import *
-from random import randint
+import random
 import pygame
 import time
 
@@ -12,18 +12,14 @@ class Apple:
     y = 0
 
     def place(self):
-        self.x = random.randint(WIDTH)
-        self.y = random.randint(HEIGHT)
-"""
-    def draw(self, surface, image):
-        pygame.draw.rect(surface, [self.x, self.y, STEP, STEP])"""
-
+        self.x = random.randint(0, WIDTH)
+        self.y = random.randint(0, HEIGHT)
+        print('Apple: %d %d' % (self.x, self.y))
 
 class Segment:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-
 
 class Snake:
     segments = []
@@ -56,10 +52,6 @@ class Snake:
         return False
 
     # TODO: Implement ate method here?
-    """
-    def draw(self, surface, image):
-        for i in range(0,self.length):
-            surface.blit(image,(self.x[i],self.y[i]))"""
 
 BLACK = (  0,   0,   0)
 WHITE = (255, 255, 255)
@@ -98,9 +90,9 @@ class App:
 
     def on_render(self):
         self.surface.fill(BLACK)
-        pygame.draw.rect(self.surface, RED, [self.apple.x * STEP, self.apple.y * STEP, STEP, STEP])
+        pygame.draw.rect(self.surface, RED, [self.apple.x * STEP, (HEIGHT - self.apple.y) * STEP, STEP, STEP])
         for segment in self.snake.segments:
-            pygame.draw.rect(self.surface, GREEN, [segment.x * STEP, segment.y * STEP, STEP, STEP])
+            pygame.draw.rect(self.surface, GREEN, [segment.x * STEP, (HEIGHT - segment.y) * STEP, STEP, STEP])
         pygame.display.flip()
 
     def on_cleanup(self):
@@ -109,11 +101,11 @@ class App:
     def on_execute(self):
         if self.on_init() == False:
             self.running = False
+        self.apple.place()
 
         while (self.running):
             pygame.event.pump()
             keys = pygame.key.get_pressed()
-            print(keys)
 
             if (keys[K_RIGHT]):
                 self.snake.set_speed(1, 0)
@@ -129,9 +121,8 @@ class App:
             self.on_loop()
             self.on_render()
 
-            time.sleep (50 / 1000)
+            time.sleep(0.1)
         self.on_cleanup()
 
 if __name__ == '__main__':
     App().on_execute()
-
