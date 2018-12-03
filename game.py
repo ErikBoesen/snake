@@ -35,19 +35,19 @@ class Snake:
 
     def set_speed(self, x, y):
         if (not ((-x == self.speed_x) and (-y == self.speed_y))) or (len(self.segments) == 1):
-            this.speed_x = x
-            this.speed_y = y
+            self.speed_x = x
+            self.speed_y = y
 
     def move(self):
-        self.segments[0].x += this.speed_x
-        self.segments[0].y += this.speed_y
+        self.segments[0].x += self.speed_x
+        self.segments[0].y += self.speed_y
         for i in range(len(self.segments), 1, -1):
             self.segments[i].x = self.segments[i - 1].x
             self.segments[i].y = self.segments[i - 1].y
 
     def grow(self):
         tail = self.segments[-1]
-        self.segments.append(Segment(tail.x + self.speed_x, tail.y + self.speed_y)
+        self.segments.append(Segment(tail.x + self.speed_x, tail.y + self.speed_y))
 
     def looped(self):
         for segment in segments[1:]:
@@ -86,7 +86,7 @@ class App:
 
     def on_loop(self):
         self.snake.move()
-        # TODO: Move this logic to snake
+        # TODO: Move self logic to snake
         if self.snake.segments[0].x == self.apple.x and self.snake.segments[0].y == self.apple.y:
             self.apple.place()
             self.snake.grow()
