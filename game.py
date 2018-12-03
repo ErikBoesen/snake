@@ -64,7 +64,6 @@ class App:
     apple = Apple()
 
     def __init__(self):
-        self.running = True
         pygame.init()
         self.surface = pygame.display.set_mode((WIDTH * STEP, HEIGHT * STEP))
         pygame.display.set_caption('Snake')
