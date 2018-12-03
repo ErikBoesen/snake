@@ -14,7 +14,6 @@ class Apple:
     def place(self):
         self.x = random.randint(0, WIDTH-1)
         self.y = random.randint(1, HEIGHT)
-        print('Apple: %d %d' % (self.x, self.y))
 
 class Segment:
     def __init__(self, x=0, y=0):
@@ -63,7 +62,6 @@ BLUE  = (  0,   0, 255)
 GREEN = (  0, 255,   0)
 RED   = (255,   0,   0)
 class App:
-    # TODO: Move actual game logic to Game object
     snake = Snake()
     apple = Apple()
 
@@ -95,9 +93,6 @@ class App:
             pygame.draw.rect(self.surface, GREEN, [segment.x * STEP, (HEIGHT - segment.y) * STEP, STEP, STEP])
         pygame.display.flip()
 
-    def cleanup(self):
-        pygame.quit()
-
     def execute(self):
         self.apple.place()
 
@@ -120,7 +115,7 @@ class App:
             self.render()
 
             time.sleep(0.1)
-        self.cleanup()
+        pygame.quit()
 
 if __name__ == '__main__':
     App().execute()
