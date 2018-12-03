@@ -17,7 +17,7 @@ class Apple:
         print('Apple: %d %d' % (self.x, self.y))
 
 class Segment:
-    def __init__(self, x, y):
+    def __init__(self, x=0, y=0):
         self.x = x
         self.y = y
 
@@ -43,7 +43,7 @@ class Snake:
 
     def grow(self):
         tail = self.segments[-1]
-        self.segments.append(Segment(tail.x + self.speed_x, tail.y + self.speed_y))
+        self.segments.append(Segment())
 
     def looped(self):
         for segment in self.segments[1:]:
@@ -83,7 +83,7 @@ class App:
             self.apple.place()
             self.snake.grow()
 
-        if not (0 <= self.snake.segments[0].x < WIDTH and 0 <= self.snake.segments[0].y < HEIGHT):# or self.snake.looped():
+        if not (0 <= self.snake.segments[0].x < WIDTH and 0 <= self.snake.segments[0].y < HEIGHT) or self.snake.looped():
             print(len(self.snake.segments))
             # TODO: Reset game rather than quitting
             self.running = False
