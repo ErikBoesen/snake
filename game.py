@@ -4,16 +4,16 @@ import pygame
 import time
 
 STEP   = 20
-WIDTH  = 40
-HEIGHT = 40
+WIDTH  = 30
+HEIGHT = 30
 
 class Apple:
     x = 0
     y = 0
 
     def place(self):
-        self.x = random.randint(0, WIDTH - 1)
-        self.y = random.randint(0, HEIGHT - 1)
+        self.x = random.randint(0, WIDTH-1)
+        self.y = random.randint(1, HEIGHT)
         print('Apple: %d %d' % (self.x, self.y))
 
 class Segment:
