@@ -12,8 +12,8 @@ class Apple:
     y = 0
 
     def place(self):
-        self.x = random.randint(0, WIDTH)
-        self.y = random.randint(0, HEIGHT)
+        self.x = random.randint(0, WIDTH - 1)
+        self.y = random.randint(0, HEIGHT - 1)
         print('Apple: %d %d' % (self.x, self.y))
 
 class Segment:
@@ -37,7 +37,7 @@ class Snake:
     def move(self):
         self.segments[0].x += self.speed_x
         self.segments[0].y += self.speed_y
-        for i in range(len(self.segments), 1, -1):
+        for i in range(len(self.segments) - 1, 1, -1):
             self.segments[i].x = self.segments[i - 1].x
             self.segments[i].y = self.segments[i - 1].y
 
