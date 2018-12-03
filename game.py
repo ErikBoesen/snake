@@ -98,9 +98,9 @@ class App:
 
     def on_render(self):
         self.surface.fill(BLACK)
-        pygame.draw.rect(self.surface, RED, [self.apple.x, self.apple.y, STEP, STEP])
+        pygame.draw.rect(self.surface, RED, [self.apple.x * STEP, self.apple.y * STEP, STEP, STEP])
         for segment in self.snake.segments:
-            pygame.draw.rect(self.surface, GREEN, [segment.x, segment.y, STEP, STEP])
+            pygame.draw.rect(self.surface, GREEN, [segment.x * STEP, segment.y * STEP, STEP, STEP])
         pygame.display.flip()
 
     def on_cleanup(self):
@@ -116,13 +116,13 @@ class App:
             print(keys)
 
             if (keys[K_RIGHT]):
-                pass
+                self.snake.set_speed(1, 0)
             if (keys[K_LEFT]):
-                pass
+                self.snake.set_speed(-1, 0)
             if (keys[K_UP]):
-                pass
+                self.snake.set_speed(0, 1)
             if (keys[K_DOWN]):
-                pass
+                self.snake.set_speed(0, -1)
             if (keys[K_ESCAPE]):
                 self.running = False
 
