@@ -3,71 +3,57 @@ from random import randint
 import pygame
 import time
 
-STEP = 20
+STEP   = 20
+WIDTH  = 10
+HEIGHT = 10
 
 class Apple:
     x = 0
     y = 0
 
-    def __init__(self, x, y):
-        self.x = x * STEP
-        self.y = y * STEP
+    def place(self):
+        self.x = random.randint(WIDTH)
+        self.y = random.randint(HEIGHT)
 
     def draw(self, surface, image):
         pygame.draw.rect(surface, [self.x, self.y, STEP, STEP])
 
-class Player:
-    x = [0]
-    y = [0]
-    direction = 0
-    length = 3
 
-    updateCountMax = 2
-    updateCount = 0
-
-    def __init__(self, length):
-       self.length = length
-       for i in range(0,2000):
-           self.x.append(-100)
-           self.y.append(-100)
-
-       # initial positions, no collision.
-       self.x[0] = 1*44
-       self.x[0] = 2*44
-
-    def update(self):
-        self.updateCount += 1
-        if self.updateCount > self.updateCountMax:
-
-            # update previous positions
-            for i in range(self.length-1,0,-1):
-                self.x[i] = self.x[i-1]
-                self.y[i] = self.y[i-1]
-
-            # update position of head of snake
-            if self.direction == 0:
-                self.x[0] = self.x[0] + STEP
-            if self.direction == 1:
-                self.x[0] = self.x[0] - STEP
-            if self.direction == 2:
-                self.y[0] = self.y[0] - STEP
-            if self.direction == 3:
-                self.y[0] = self.y[0] + STEP
-
-            self.updateCount = 0
+class Segment:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
 
 
-    def moveRight(self):
-        self.direction = 0
+class Snake:
+    segments = []
+    speed_x = 0
+    speed_y = 0
 
-    def moveLeft(self):
-        self.direction = 1
+    def __init__(self, x, y):
+        self.segments.append(Segment(x, y))
 
-    def moveUp(self):
-        self.direction = 2
+    def set_speed(self, x, y):
+        if (not ((-x == self.speed_x) and (-y == self.speed_y))) or (len(self.segments) == 1):
+            this.speed_x = x
+            this.speed_y = y
 
-    def moveDown(self):
-        self.direction = 3
+    def move(self):
+        self.segments[0].x += this.speed_x
+        self.segments[0].y += this.speed_y
+        for i in range(len(self.segments), 1, -1):
+            self.segments[i].x = self.segments[i - 1].x
+            self.segments[i].y = self.segments[i - 1].y
+
+    def grow(self):
+        tail = self.segments[-1]
+        self.segments.append(Segment(tail.x + self.speed_x, tail.y + self.speed_y)
+
+    def looped(self):
+        for segment in segments[1:]:
+            if segment.x == segments[0].x and segment.y == segments[0].y:
+                return True
+        return False
 
     def draw(self, surface, image):
         for i in range(0,self.length):
