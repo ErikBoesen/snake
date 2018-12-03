@@ -51,6 +51,9 @@ class Snake:
                 return True
         return False
 
+    def outbound(self):
+        return not (0 <= self.segments[0].x < WIDTH and 0 <= self.segments[0].y < HEIGHT)
+
     # TODO: Implement ate method here?
 
 BLACK = (  0,   0,   0)
@@ -80,7 +83,7 @@ class App:
             self.apple.place()
             self.snake.grow()
 
-        if not (0 <= self.snake.segments[0].x < WIDTH and 0 <= self.snake.segments[0].y < HEIGHT) or self.snake.looped():
+        if self.snake.outbound() or self.snake.looped():
             print(len(self.snake.segments))
             # TODO: Reset game rather than quitting
             self.running = False
