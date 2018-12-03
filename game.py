@@ -29,7 +29,7 @@ class Snake:
     def __init__(self):
         self.segments.append(Segment(random.randint(0, WIDTH-1), random.randint(1, HEIGHT)))
 
-    def set_speed(self, x, y):
+    def set_speed(self, x: int, y: int):
         if (not ((-x == self.speed_x) and (-y == self.speed_y))) or (len(self.segments) == 1):
             self.speed_x = x
             self.speed_y = y
@@ -45,16 +45,16 @@ class Snake:
         tail = self.segments[-1]
         self.segments.append(Segment())
 
-    def looped(self):
+    def looped(self) -> bool:
         for segment in self.segments[1:]:
             if segment.x == self.segments[0].x and segment.y == self.segments[0].y:
                 return True
         return False
 
-    def outbound(self):
+    def outbound(self) -> bool:
         return not (0 <= self.segments[0].x < WIDTH and 0 <= self.segments[0].y < HEIGHT)
 
-    def ate(self, apple):
+    def ate(self, apple: Apple) -> bool:
         return self.segments[0].x == apple.x and self.segments[0].y == apple.y
 
 BLACK = (  0,   0,   0)
