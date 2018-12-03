@@ -52,7 +52,7 @@ class Snake:
         return False
 
     def outbound(self) -> bool:
-        return not (0 <= self.segments[0].x < WIDTH and 0 <= self.segments[0].y < HEIGHT)
+        return not (0 <= self.segments[0].x < WIDTH and 1 <= self.segments[0].y < HEIGHT)
 
     def ate(self, apple: Apple) -> bool:
         return self.segments[0].x == apple.x and self.segments[0].y == apple.y
