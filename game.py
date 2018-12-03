@@ -4,8 +4,8 @@ import pygame
 import time
 
 STEP   = 20
-WIDTH  = 10
-HEIGHT = 10
+WIDTH  = 40
+HEIGHT = 40
 
 class Apple:
     x = 0
@@ -37,7 +37,7 @@ class Snake:
     def move(self):
         self.segments[0].x += self.speed_x
         self.segments[0].y += self.speed_y
-        for i in range(len(self.segments) - 1, 1, -1):
+        for i in range(len(self.segments) - 1, 0, -1):
             self.segments[i].x = self.segments[i - 1].x
             self.segments[i].y = self.segments[i - 1].y
 
@@ -83,7 +83,7 @@ class App:
             self.apple.place()
             self.snake.grow()
 
-        if not (0 <= self.snake.segments[0].x < WIDTH and 0 <= self.snake.segments[0].y < HEIGHT) or self.snake.looped():
+        if not (0 <= self.snake.segments[0].x < WIDTH and 0 <= self.snake.segments[0].y < HEIGHT):# or self.snake.looped():
             print(len(self.snake.segments))
             # TODO: Reset game rather than quitting
             self.running = False
